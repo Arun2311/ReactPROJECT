@@ -71,7 +71,7 @@ export default function Todo() {
             onClick={() => handledelete(to.id)}
             className="btn btn-danger"
           >
-            X
+            Delete
           </button>
 
           <button
