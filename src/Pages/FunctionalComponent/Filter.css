@@ -1,0 +1,20 @@
+.tab{
+    padding: 20px;
+   margin: 20px;
+}
+
+h1{
+    margin-top: 10px;
+}
+
+.spa{
+    margin-top: 50px;
+    margin-left: 90px;
+}
+
+.tab:hover{
+    background-color: cadetblue;
+    border: 1px solid rebeccapurple;
+}
+
+

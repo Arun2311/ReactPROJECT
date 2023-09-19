@@ -1,0 +1,16 @@
+.btn-clr{
+  color: azure;
+  background-color: coral;
+  margin: 2px;
+  padding: 2px;
+}
+
+span{
+  color: red;
+  margin: 10px;
+}
+
+
+span:hover{
+  background-color: antiquewhite;
+}
