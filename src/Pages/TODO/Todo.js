@@ -1,55 +1,61 @@
 // crud
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
 export default function Todo() {
   const v = uuidv4();
   const [input, setinput] = useState();
-  const [todolist, setTodolist] = useState([
-    {
-      id: 1,
-      task: "Wake up",
-    },
-    {
-      id: 2,
-      task: "brush",
-    },
-    {
-      id: 3,
-      task: "bath",
-    },
-    {
-      id: 4,
-      task: "eat",
-    },
-  ]);
+  const [todolist, setTodolist] = useState([]);
+
+  const datafetch = async () => {
+    // let data = await fetch("http://localhost:3000/todoList");
+    // let response = await data.json();
+    // console.log(response);
+
+    let response = await axios.get("http://localhost:3000/todoList");
+    setTodolist(response.data);
+  };
+
+  useEffect(() => {
+    datafetch();
+  }, []);
 
   const handleaddchange = (e) => {
     setinput(e.target.value);
   };
 
   const handleadd = () => {
-    setTodolist([...todolist, { id: uuidv4(), task: input }]);
+    axios.post("http://localhost:3000/todoList", { id: uuidv4(), task: input });
+
+    datafetch();
+    // setTodolist([...todolist, { id: uuidv4(), task: input }]);
     setinput("");
   };
 
-  const handledelete = (deleteid) => {
-    console.log(deleteid, "clivk");
+  const handledelete = async (deleteid) => {
 
-    const filterdelete = todolist.filter((todo) => todo.id !== deleteid);
-    setTodolist(filterdelete);
+    await axios.delete(`http://localhost:3000/todoList/${deleteid}`)
+    datafetch();
+
+    // const filterdelete = todolist.filter((todo) => todo.id !== deleteid);
+    // setTodolist(filterdelete);
   };
 
-  const handleupdate = (index) => {
+  const handleupdate =async (index) => {
     const update = prompt("update your todo", todolist[index].task);
 
-    let cpoied = [...todolist];
+    await axios.put(`http://localhost:3000/todoList/${todolist[index].id}`,{id:todolist[index].id,task:update})
 
-    cpoied[index].task = update;
+    datafetch();
 
-    setTodolist(cpoied);
+    // let cpoied = [...todolist];
+
+    // cpoied[index].task = update;
+
+    // setTodolist(cpoied);
   };
   return (
     <div>

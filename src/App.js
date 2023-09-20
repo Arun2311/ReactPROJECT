@@ -27,7 +27,10 @@ class App extends Component {
 
       <>
 
-      <Todo/>
+         <Slider />
+
+
+      {/* <Todo/> */}
       
       
       </>
